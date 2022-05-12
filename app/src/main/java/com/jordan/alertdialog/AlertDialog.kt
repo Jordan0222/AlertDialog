@@ -13,12 +13,16 @@ import androidx.compose.ui.text.font.FontWeight.Companion.Bold
 import androidx.compose.ui.unit.dp
 import androidx.compose.ui.window.DialogProperties
 import androidx.compose.ui.window.SecureFlagPolicy
+import com.jordan.alertdialog.ui.theme.Purple500
 
 
 @Composable
 fun AlertDialogAndDialog() {
+
     var showAlertDialog by remember { mutableStateOf(false) }
     var showDialog by remember { mutableStateOf(false) }
+    val showInformationDialog = remember { mutableStateOf(false) }
+
     val context = LocalContext.current
 
     Column(
@@ -64,6 +68,24 @@ fun AlertDialogAndDialog() {
                     showDialog = !showDialog
                     Toast.makeText(context, "Positive Button Clicked!", Toast.LENGTH_SHORT).show()
                 }
+            )
+        }
+        
+        InformationDialog(isDialogOpen = showInformationDialog)
+
+        Button(
+            onClick = {
+                showInformationDialog.value = true
+            },
+            modifier = Modifier
+                .padding(10.dp)
+                .height(50.dp),
+            shape = RoundedCornerShape(5.dp),
+            colors = ButtonDefaults.buttonColors(Purple500)
+        ) {
+            Text(
+                text = "Show Popup",
+                color = Color.White
             )
         }
     }
